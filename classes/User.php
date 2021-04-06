@@ -15,13 +15,13 @@ class User {
         $firstName = $FirstName;
     }*/
 
-    /*function __construct($_userId, $_firstName, $_lastName, $_birthday, $_email){
+    function __construct($_userId, $_firstName, $_lastName, $_birthday, $_email){
         $this->userId = $_userId;
         $this->firstName = $_firstName;
         $this->lastName = $_lastName;
         $this->birthday = $_birthday;
         $this->email = $_email;
-    }*/
+    }
 
     function getAge(){
         $unixBirthday = strtotime($this->birthday);

@@ -1,5 +1,45 @@
 <?php
 
+require __DIR__."/classes/User.php";
+require __DIR__."/vendor/JSONReader.php";
+
+if(isset($_GET['locId']) && $_GET['locId']!==""){
+    $locId = intval($_GET['locId']);
+} else {
+    $locId = "";
+}
+
+if(isset($_GET['locFirstName']) && $_GET['locFirstName']!==""){
+    $locFirstName = $_GET['locFirstName'];
+} else {
+    $locFirstName = "";
+}
+
+if(isset($_GET['locLastName']) && $_GET['locLastName']!==""){
+    $locLastName = $_GET['locLastName'];
+} else {
+    $locLastName = "";
+}
+
+if(isset($_GET['locEmail']) && $_GET['locEmail']!==""){
+    $locEmail = $_GET['locEmail'];
+} else {
+    $locEmail = "";
+}
+
+if(isset($_GET['locAge']) && $_GET['locAge']!==""){
+    $locAge = $_GET['locAge'];
+} else {
+    $locAge = "";
+}
+
+$usersList = JSONReader(__DIR__."/dataset/users-management-system.json");
+$users = [];
+foreach($usersList as $user){
+    extract($user);
+    $utente = new User($userId, $firstName, $lastName, $birthday, $email);
+    array_push($users, $utente);
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +70,9 @@
             <h2 class="display-6">user list</h2>
         </div>
     </header>
+    <form action="index.php">
     <div class="container">
-        <form action="index.php" method="POST">
+        
             <table class="table">
                 <tr>
                     <th>id</th>
@@ -42,24 +83,50 @@
                 </tr>
                 <tr>
                     <th>
-                        <input class="form-control" type="text" name="userId">
+                        <input class="form-control" type="text" name="locId" value=<?php echo $locId?>>
                     </th>
                     <th>
-                        <input class="form-control" type="text" name="firstName">
+                        <input class="form-control" type="text" name="locFirstName" value=<?php echo $locFirstName?>>
                     </th>
                     <th>
-                        <input class="form-control" type="text" name="lastName">
+                        <input class="form-control" type="text" name="locLastName" value=<?php echo $locLastName?>>
                     </th>
                     <th>
-                        <input class="form-control" type="text" name="email">
+                        <input class="form-control" type="text" name="locEmail" value=<?php echo $locEmail?>>
                     </th>
                     <th>
-                        <input class="form-control" type="text" name="age">
+                        <input class="form-control" type="text" name="locAge" value=<?php echo $locAge?>>
                     </th>
                     <th>
                         <input type="submit" class="btn btn-primary" value="cerca">
                     </th>
                 </tr>
+
+                <?php
+                foreach($users as $user){
+                    if($user->id===$locId || $user->id===""){
+                        if($user->firstName===$locFirstName || $user->firstName===""){
+                            if($user->lastName===$locLastName || $user->lastName===""){
+                                if($user->email===$locEmail || $user->email===""){
+                                    if($user->getAge()===$locAge || $user->getAge()===""){
+                                        echo ("
+                                        <tr>
+                                            <td>$user->id<td>
+                                            <td>$user->firstName<td>
+                                            <td>$user->lastName<td>
+                                            <td>$user->email<td>
+                                            <td>$user->age<td>
+                                        <tr>
+                                        ");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ?>
+
+
                 <tr>
                     <td>10</td>
                     <td>Mario</td>
@@ -75,8 +142,9 @@
                     <td>20 </td>
                 </tr>
             </table>
-        </form>
+        
     </div>
+    </form>
 </body>
 
 </html>
