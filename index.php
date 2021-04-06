@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -38,22 +42,22 @@
                 </tr>
                 <tr>
                     <th>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" name="userId">
                     </th>
                     <th>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" name="firstName">
                     </th>
                     <th>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" name="lastName">
                     </th>
                     <th>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" name="email">
                     </th>
                     <th>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" name="age">
                     </th>
                     <th>
-                        <button class="btn btn-primary">cerca</button>
+                        <input type="submit" class="btn btn-primary" value="cerca">
                     </th>
                 </tr>
                 <tr>
